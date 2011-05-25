@@ -63,6 +63,22 @@ public class TestGenericTreeNode {
     }
 
     @Test
+    public void TestNodeSetAndGetChildrenHasCorrectParent() {
+        GenericTreeNode<String> node = new GenericTreeNode<String>();
+        GenericTreeNode<String> child = new GenericTreeNode<String>();
+
+        List<GenericTreeNode<String>> children = new ArrayList<GenericTreeNode<String>>();
+        children.add(child);
+
+        node.setChildren(children);
+        assertEquals(node.getChildren(), children);
+
+        for(GenericTreeNode<String> childNode : children) {
+            assertEquals(node, childNode.getParent());
+        }
+    }
+
+    @Test
     public void TestNodeRemoveChildren() {
         GenericTreeNode<String> node = new GenericTreeNode<String>();
         GenericTreeNode<String> child = new GenericTreeNode<String>();
@@ -73,6 +89,15 @@ public class TestGenericTreeNode {
         node.setChildren(children);
         node.removeChildren();
         assertEquals(node.getChildren().size(), 0);
+    }
+
+    @Test
+    public void TestNodeAddChildHasCorrectParent() {
+        GenericTreeNode<String> node = new GenericTreeNode<String>();
+        GenericTreeNode<String> child = new GenericTreeNode<String>();
+
+        node.addChild(child);
+        assertEquals(node, child.getParent());
     }
 
     @Test
@@ -91,7 +116,6 @@ public class TestGenericTreeNode {
 
         node.addChild(child);
         assertTrue(node.hasChildren());
-
     }
 
     @Test

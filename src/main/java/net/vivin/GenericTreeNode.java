@@ -12,8 +12,9 @@ import java.util.regex.Pattern;
 
 public class GenericTreeNode<T> {
 
-    public T data;
-    public List<GenericTreeNode<T>> children;
+    private T data;
+    private List<GenericTreeNode<T>> children;
+    private GenericTreeNode<T> parent;
 
     public GenericTreeNode() {
         super();
@@ -23,6 +24,10 @@ public class GenericTreeNode<T> {
     public GenericTreeNode(T data) {
         this();
         setData(data);
+    }
+
+    public GenericTreeNode<T> getParent() {
+        return this.parent;
     }
 
     public List<GenericTreeNode<T>> getChildren() {
@@ -38,14 +43,20 @@ public class GenericTreeNode<T> {
     }
 
     public void setChildren(List<GenericTreeNode<T>> children) {
+        for(GenericTreeNode<T> child : children) {
+           child.parent = this;
+        }
+
         this.children = children;
     }
 
     public void addChild(GenericTreeNode<T> child) {
+        child.parent = this;
         children.add(child);
     }
 
     public void addChildAt(int index, GenericTreeNode<T> child) throws IndexOutOfBoundsException {
+        child.parent = this;
         children.add(index, child);
     }
 
@@ -73,38 +84,38 @@ public class GenericTreeNode<T> {
         return getData().toString();
     }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		GenericTreeNode<?> other = (GenericTreeNode<?>) obj;
-		if (data == null) {
-			if (other.data != null) {
-				return false;
-			}
-		} else if (!data.equals(other.data)) {
-			return false;
-		}
-		return true;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+           return true;
+        }
+        if (obj == null) {
+           return false;
+        }
+        if (getClass() != obj.getClass()) {
+           return false;
+        }
+        GenericTreeNode<?> other = (GenericTreeNode<?>) obj;
+        if (data == null) {
+           if (other.data != null) {
+              return false;
+           }
+        } else if (!data.equals(other.data)) {
+           return false;
+        }
+        return true;
+    }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((data == null) ? 0 : data.hashCode());
-		return result;
-	}
+    /* (non-Javadoc)
+    * @see java.lang.Object#hashCode()
+    */
+    @Override
+    public int hashCode() {
+       final int prime = 31;
+       int result = 1;
+       result = prime * result + ((data == null) ? 0 : data.hashCode());
+       return result;
+    }
 
     public String toStringVerbose() {
         String stringRepresentation = getData().toString() + ":[";

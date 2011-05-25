@@ -3,6 +3,8 @@
  Distributed under the BSD License
 */
 
+package net.vivin;
+
 import org.testng.annotations.Test;
 import java.util.*;
 import static org.testng.Assert.*;
@@ -29,17 +31,17 @@ public class TestGenericTree {
     @Test
     void TestExistsIsFalseOnNewTreeCreation() {
         GenericTree<String> tree = new GenericTree<String>();
-        GenericTreeNode<String> nodeToFind = new GenericTreeNode<String>();
+        String dataToFind = "";
 
-        assertFalse(tree.exists(nodeToFind));
+        assertFalse(tree.exists(dataToFind));
     }
 
     @Test
     void TestFindReturnsNullOnNewTreeCreation() {
         GenericTree<String> tree = new GenericTree<String>();
-        GenericTreeNode<String> nodeToFind = new GenericTreeNode<String>();
+        String dataToFind = "";
 
-        assertNull(tree.find(nodeToFind));
+        assertNull(tree.find(dataToFind));
     }
 
     @Test
@@ -190,9 +192,9 @@ public class TestGenericTree {
 
         tree.setRoot(rootA);
 
-        GenericTreeNode<String> nodeToFindD = new GenericTreeNode<String>("D");
+        String dataToFindD = "D";
 
-        assertTrue(tree.exists(nodeToFindD));
+        assertTrue(tree.exists(dataToFindD));
     }
 
     @Test
@@ -210,9 +212,9 @@ public class TestGenericTree {
 
         tree.setRoot(rootA);
 
-        GenericTreeNode<String> nodeToFindD = new GenericTreeNode<String>("D");
+        String dataToFindD = "D";
 
-        assertNotNull(tree.find(nodeToFindD));
+        assertNotNull(tree.find(dataToFindD));
     }
 
     @Test
@@ -230,9 +232,9 @@ public class TestGenericTree {
 
         tree.setRoot(rootA);
 
-        GenericTreeNode<String> nodeToFindE = new GenericTreeNode<String>("E");
+        String dataToFindE = "E";
 
-        assertFalse(tree.exists(nodeToFindE));
+        assertFalse(tree.exists(dataToFindE));
     }
 
     @Test
@@ -250,9 +252,9 @@ public class TestGenericTree {
 
         tree.setRoot(rootA);
 
-        GenericTreeNode<String> nodeToFindE = new GenericTreeNode<String>("E");
+        String dataToFindE = "E";
 
-        assertNull(tree.find(nodeToFindE));
+        assertNull(tree.find(dataToFindE));
     }
 
     // Pre-order traversal will give us A B C D

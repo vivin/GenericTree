@@ -43,32 +43,32 @@ public class GenericTree<T> {
         return numberOfNodes;
     }
 
-    public boolean exists(GenericTreeNode<T> nodeToFind) {
-        return (find(nodeToFind) != null);
+    public boolean exists(T dataToFind) {
+        return (find(dataToFind) != null);
     }
 
-    public GenericTreeNode<T> find(GenericTreeNode<T> nodeToFind) {
+    public GenericTreeNode<T> find(T dataToFind) {
         GenericTreeNode<T> returnNode = null;
 
         if(root != null) {
-            returnNode = auxiliaryFind(root, nodeToFind);
+            returnNode = auxiliaryFind(root, dataToFind);
         }
 
         return returnNode;
     }
 
-    private GenericTreeNode<T> auxiliaryFind(GenericTreeNode<T> currentNode, GenericTreeNode<T> nodeToFind) {
+    private GenericTreeNode<T> auxiliaryFind(GenericTreeNode<T> currentNode, T dataToFind) {
         GenericTreeNode<T> returnNode = null;
         int i = 0;
 
-        if (currentNode.equals(nodeToFind)) {
+        if (currentNode.getData().equals(dataToFind)) {
             returnNode = currentNode;
         }
 
         else if(currentNode.hasChildren()) {
             i = 0;
             while(returnNode == null && i < currentNode.getNumberOfChildren()) {
-                returnNode = auxiliaryFind(currentNode.getChildAt(i), nodeToFind);
+                returnNode = auxiliaryFind(currentNode.getChildAt(i), dataToFind);
                 i++;
             }
         }
