@@ -1,0 +1,20 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'net.vivin'
+version = '1.0.0'
+
+description = "GenericTree: N-ary trees in Java"
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    testCompile "org.testng:testng:6.9.10"
+}
+
+test {
+    useTestNG()
+}
